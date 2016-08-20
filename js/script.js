@@ -80,14 +80,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 // *** start ***
 // On first load, show home view
-showLoading("#main-content");
-$ajaxUtils.sendGetRequest(
-  allCategoriesUrl,
-  function () {
-    homeHtmlUrl, buildAndShowHomeHTML
-  }, // ***** <---- TODO: STEP 1: Substitute [...] ******
-  true); // Explicitely setting the flag to get JSON from server processed into an object literal
-});
+dc.loadMenuCategories = function () {
+  showLoading("#main-content");
+  $ajaxUtils.sendGetRequest(
+    homeHtmlUrl,
+    buildAndShowHomeHTML);
+};
+   // ***** <---- TODO: STEP 1: Substitute [...] ******
+ // Explicitely setting the flag to get JSON from server processed into an object literal
 // *** finish **
 
 
@@ -103,10 +103,9 @@ console.log("next");
       // TODO: STEP 2: Here, call chooseRandomCategory, passing it retrieved 'categories'
       // Pay attention to what type of data that function returns vs what the chosenCategoryShortName
       // variable's name implies it expects.
-       var chosenCategoryShortName = function (categories) {
-         var name = categories.short_name;
-         document.querySelector("#specials-tile").innerHTML = "<img src='menu/{{short_name}}'></div>"
-       }
+      // var chosenCategoryShortName = function (categories) {
+        // var name = categories.short_name;
+       //}
 
 
       // TODO: STEP 3: Substitute {{randomCategoryShortName}} in the home html snippet with the
@@ -116,12 +115,7 @@ console.log("next");
       // syntax because the substitution of {{randomCategoryShortName}} becomes an argument
       // being passed into the $dc.loadMenuItems function. Think about what that argument needs
       // to look like. For example, a valid call would look something like this:
-       $dc.loadMenuItems = function (randomshort) {
-         showLoading("#main-content");
-  $ajaxUtils.sendGetRequest(
-    randomshort,
-    buildAndShowHomeHTML);
-       }
+       //$dc.loadMenuItems('L')
       // Hint: you need to surround the chosen category short name with something before inserting
       // it into the home html snippet.
       //
